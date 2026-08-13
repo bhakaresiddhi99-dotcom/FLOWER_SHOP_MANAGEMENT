@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bouquet Management</title>
+
+<link rel="stylesheet" href="../css/bouquet.css">
+
+</head>
+
+<body>
+
+<h1>Bouquet Management</h1>
+
+<form id="bouquetForm">
+
+<input
+type="text"
+id="bouquet_name"
+placeholder="Bouquet Name"
+required>
+
+<input
+type="number"
+id="flower_id"
+placeholder="Flower ID"
+required>
+
+<input
+type="number"
+id="price"
+placeholder="Price"
+required>
+
+<textarea
+id="description"
+placeholder="Description"
+required></textarea>
+
+<button type="submit">
+Add Bouquet
+</button>
+
+</form>
+
+<hr>
+
+<table border="1">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Bouquet Name</th>
+<th>Flower ID</th>
+<th>Price</th>
+<th>Description</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="bouquetTable">
+
+</tbody>
+
+</table>
+
+<script src="../js/bouquet.js"></script>
+
+</body>
+</html>

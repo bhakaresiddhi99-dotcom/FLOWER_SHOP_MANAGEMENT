@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Tracking</title>
+
+    <link rel="stylesheet" href="css/delivery_tracking.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🚚 Delivery Tracking</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="top-bar">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search Order ID..."
+                onkeyup="searchDelivery()">
+
+            <button onclick="loadDelivery()">
+                Refresh
+            </button>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Delivery ID</th>
+                    <th>Order ID</th>
+                    <th>Address</th>
+                    <th>Delivery Date</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="deliveryTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script src="js/delivery_tracking.js"></script>
+
+</body>
+
+</html>

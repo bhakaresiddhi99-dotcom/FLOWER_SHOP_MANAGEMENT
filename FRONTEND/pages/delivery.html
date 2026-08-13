@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Management</title>
+
+    <link rel="stylesheet" href="../css/delivery.css">
+</head>
+
+<body>
+
+<h1>Delivery Management</h1>
+
+<form id="deliveryForm">
+
+    <input
+    type="number"
+    id="order_id"
+    placeholder="Order ID"
+    required>
+
+    <input
+    type="text"
+    id="delivery_address"
+    placeholder="Delivery Address"
+    required>
+
+    <input
+    type="date"
+    id="delivery_date"
+    required>
+
+    <select id="delivery_status" required>
+
+        <option value="">Select Status</option>
+
+        <option>Pending</option>
+        <option>Out for Delivery</option>
+        <option>Delivered</option>
+
+    </select>
+
+    <button type="submit">
+
+        Add Delivery
+
+    </button>
+
+</form>
+
+<hr>
+
+<table border="1">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Order ID</th>
+<th>Address</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="deliveryTable">
+
+</tbody>
+
+</table>
+
+<script src="../js/delivery.js"></script>
+
+</body>
+
+</html>

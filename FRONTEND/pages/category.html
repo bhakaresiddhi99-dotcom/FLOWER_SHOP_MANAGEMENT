@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Management</title>
+
+    <link rel="stylesheet" href="../css/category.css">
+</head>
+<body>
+
+<h1>Category Management</h1>
+
+<form id="categoryForm">
+
+    <input type="text"
+           id="category_name"
+           placeholder="Category Name"
+           required>
+
+    <textarea
+        id="description"
+        placeholder="Description"
+        required>
+    </textarea>
+
+    <button type="submit">
+        Add Category
+    </button>
+
+</form>
+
+<hr>
+
+<table border="1">
+
+    <thead>
+
+        <tr>
+            <th>ID</th>
+            <th>Category Name</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+
+    <tbody id="categoryTable">
+
+    </tbody>
+
+</table>
+
+<script src="../js/category.js"></script>
+
+</body>
+</html>

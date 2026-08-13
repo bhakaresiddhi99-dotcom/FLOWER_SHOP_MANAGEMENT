@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+
+    <link rel="stylesheet" href="../css/inventory.css">
+</head>
+
+<body>
+
+<h1>Inventory Management</h1>
+
+<form id="inventoryForm">
+
+    <input
+    type="number"
+    id="flower_id"
+    placeholder="Flower ID"
+    required>
+
+    <input
+    type="number"
+    id="stock_quantity"
+    placeholder="Stock Quantity"
+    required>
+
+    <input
+    type="date"
+    id="last_updated"
+    required>
+
+    <button type="submit">
+        Add Inventory
+    </button>
+
+</form>
+
+<hr>
+
+<table border="1">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Flower ID</th>
+<th>Stock Quantity</th>
+<th>Last Updated</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="inventoryTable">
+
+</tbody>
+
+</table>
+
+<script src="../js/inventory.js"></script>
+
+</body>
+</html>

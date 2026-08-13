@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Flower Management</title>
+
+<link rel="stylesheet" href="../css/flower.css">
+
+</head>
+
+
+<body>
+
+
+<h1>Flower Management</h1>
+
+
+
+<form id="flowerForm">
+
+
+<input 
+type="text"
+id="flower_name"
+placeholder="Flower Name"
+required>
+
+
+<input 
+type="number"
+id="price"
+placeholder="Price"
+required>
+
+
+<input 
+type="number"
+id="quantity"
+placeholder="Quantity"
+required>
+
+
+<input 
+type="text"
+id="category"
+placeholder="Category"
+required>
+
+
+<input 
+type="text"
+id="image"
+placeholder="Image URL"
+required>
+
+
+
+<button type="submit">
+Add Flower
+</button>
+
+
+</form>
+
+
+
+<hr>
+
+
+
+<table border="1">
+
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Price</th>
+
+<th>Quantity</th>
+
+<th>Category</th>
+
+<th>Image</th>
+
+<th>Action</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="flowerTable">
+
+</tbody>
+
+
+
+</table>
+
+
+
+<script src="../js/flower.js"></script>
+
+
+</body>
+
+</html>

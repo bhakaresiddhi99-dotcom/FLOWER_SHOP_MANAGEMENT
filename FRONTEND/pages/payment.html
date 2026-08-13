@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment Management</title>
+
+<link rel="stylesheet" href="../css/payment.css">
+
+</head>
+
+<body>
+
+<h1>Payment Management</h1>
+
+<form id="paymentForm">
+
+<input
+type="number"
+id="order_id"
+placeholder="Order ID"
+required>
+
+<select id="payment_method" required>
+
+<option value="">Select Payment Method</option>
+
+<option>Cash</option>
+
+<option>UPI</option>
+
+<option>Card</option>
+
+<option>Net Banking</option>
+
+</select>
+
+<select id="payment_status" required>
+
+<option value="">Select Payment Status</option>
+
+<option>Pending</option>
+
+<option>Paid</option>
+
+<option>Failed</option>
+
+</select>
+
+<input
+type="number"
+id="amount"
+placeholder="Amount"
+required>
+
+<button type="submit">
+
+Add Payment
+
+</button>
+
+</form>
+
+<hr>
+
+<table border="1">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Order ID</th>
+<th>Method</th>
+<th>Status</th>
+<th>Amount</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="paymentTable">
+
+</tbody>
+
+</table>
+
+<script src="../js/payment.js"></script>
+
+</body>
+
+</html>

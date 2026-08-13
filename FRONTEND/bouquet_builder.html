@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Bouquet Builder</title>
+
+    <link rel="stylesheet" href="css/bouquet_builder.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🌸 Custom Bouquet Builder 🌸</h1>
+        <p>Create Your Own Beautiful Bouquet</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Customer Details -->
+
+        <div class="customer-box">
+
+            <h2>Customer Details</h2>
+
+            <div class="input-group">
+
+                <div>
+                    <label>Customer Name</label>
+                    <input type="text" id="customerName" placeholder="Enter Customer Name">
+                </div>
+
+                <div>
+                    <label>Mobile Number</label>
+                    <input type="text" id="mobileNumber" placeholder="Enter Mobile Number">
+                </div>
+
+                <div>
+                    <label>Bouquet Name</label>
+                    <input type="text" id="bouquetName" placeholder="Birthday Bouquet">
+                </div>
+
+                <div>
+                    <label>Delivery Date</label>
+                    <input type="date" id="deliveryDate">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Flower Cards -->
+
+        <h2 class="title">🌹 Select Flowers</h2>
+
+        <div id="flowerList" class="flowers">
+
+            <!-- JavaScript will load flower cards here -->
+
+        </div>
+
+        <!-- Bouquet Summary -->
+
+        <div class="summary">
+
+            <h2>💐 Bouquet Summary</h2>
+
+            <div id="selectedFlowers">
+
+                No flowers selected.
+
+            </div>
+
+            <hr>
+
+            <div class="summary-row">
+                <h3>Total Flowers</h3>
+                <span id="flowerCount">0</span>
+            </div>
+
+            <div class="summary-row">
+                <h3>Total Price</h3>
+                <span>₹ <span id="totalPrice">0</span></span>
+            </div>
+
+            <div class="buttons">
+
+                <button class="save-btn" onclick="saveBouquet()">
+                    💾 Save Bouquet
+                </button>
+
+                <button class="order-btn" onclick="placeOrder()">
+                    🛒 Place Order
+                </button>
+
+                <button class="reset-btn" onclick="resetBouquet()">
+                    🔄 Reset
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/bouquet_builder.js"></script>
+
+</body>
+
+</html>

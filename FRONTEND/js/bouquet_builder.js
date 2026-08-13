@@ -1,0 +1,480 @@
+// ==========================================
+// CUSTOM BOUQUET BUILDER
+// ==========================================
+
+const flowers = [
+
+    {
+        id: 1,
+        name: "Rose",
+        price: 100,
+        image: "images/rose.jpg",
+        qty: 0
+    },
+
+    {
+        id: 2,
+        name: "Sunflower",
+        price: 80,
+        image: "images/sunflower.jpg",
+        qty: 0
+    },
+
+    {
+        id: 3,
+        name: "Tulip",
+        price: 150,
+        image: "images/tulip.jpg",
+        qty: 0
+    },
+
+    {
+        id: 4,
+        name: "Lily",
+        price: 120,
+        image: "images/lily.jpg",
+        qty: 0
+    },
+
+    {
+        id: 5,
+        name: "Orchid",
+        price: 250,
+        image: "images/orchid.jpg",
+        qty: 0
+    },
+
+    {
+        id: 6,
+        name: "Marigold",
+        price: 60,
+        image: "images/marigold.jpg",
+        qty: 0
+    },
+
+    {
+        id: 7,
+        name: "Lotus",
+        price: 180,
+        image: "images/lotus.jpg",
+        qty: 0
+    },
+
+    {
+        id: 8,
+        name: "Daisy",
+        price: 90,
+        image: "images/daisy.jpg",
+        qty: 0
+    },
+
+    {
+        id: 9,
+        name: "Jasmine",
+        price: 70,
+        image: "images/jasmine.jpg",
+        qty: 0
+    },
+
+    {
+        id: 10,
+        name: "Carnation",
+        price: 140,
+        image: "images/carnation.jpg",
+        qty: 0
+    }
+
+];
+
+
+// ==========================================
+// GET FLOWER FROM FLOWERS PAGE
+// ==========================================
+
+const selectedFlower =
+    JSON.parse(localStorage.getItem("selectedFlower"));
+
+if (selectedFlower) {
+
+    const flower = flowers.find(
+        f => f.id === selectedFlower.id
+    );
+
+    if (flower) {
+        flower.qty = 1;
+    }
+
+    localStorage.removeItem("selectedFlower");
+}
+
+
+// Load flowers
+loadFlowers();
+
+
+// ==========================================
+// LOAD FLOWERS
+// ==========================================
+
+function loadFlowers() {
+
+    let html = "";
+
+    flowers.forEach((flower, index) => {
+
+        html += `
+
+        <div class="card">
+
+            <img
+                src="${flower.image}"
+                alt="${flower.name}"
+            >
+
+            <h2>${flower.name}</h2>
+
+            <p>
+                <b>Price :</b> ₹${flower.price}
+            </p>
+
+            <p>
+                <b>Category :</b> Fresh Flower
+            </p>
+
+            <div class="qty">
+
+                <button onclick="minus(${index})">
+                    -
+                </button>
+
+                <span id="qty${index}">
+                    ${flower.qty}
+                </span>
+
+                <button onclick="plus(${index})">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("flowerList").innerHTML = html;
+
+    update();
+}
+
+
+// ==========================================
+// PLUS
+// ==========================================
+
+function plus(index) {
+
+    flowers[index].qty++;
+
+    update();
+}
+
+
+// ==========================================
+// MINUS
+// ==========================================
+
+function minus(index) {
+
+    if (flowers[index].qty > 0) {
+        flowers[index].qty--;
+    }
+
+    update();
+}
+
+
+// ==========================================
+// UPDATE SUMMARY
+// ==========================================
+
+function update() {
+
+    let total = 0;
+    let count = 0;
+    let summary = "";
+
+
+    flowers.forEach((flower, index) => {
+
+        document.getElementById(
+            "qty" + index
+        ).innerHTML = flower.qty;
+
+
+        if (flower.qty > 0) {
+
+            count += flower.qty;
+
+            total +=
+                flower.qty * flower.price;
+
+
+            summary += `
+                <p>
+                    🌸 ${flower.name}
+                    × ${flower.qty}
+                    = ₹${flower.qty * flower.price}
+                </p>
+            `;
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "selectedFlowers"
+    ).innerHTML =
+        summary || "No flowers selected";
+
+
+    document.getElementById(
+        "flowerCount"
+    ).innerHTML = count;
+
+
+    document.getElementById(
+        "totalPrice"
+    ).innerHTML = total;
+}
+
+
+// ==========================================
+// RESET BOUQUET
+// ==========================================
+
+function resetBouquet() {
+
+    flowers.forEach(flower => {
+        flower.qty = 0;
+    });
+
+
+    document.getElementById(
+        "customerName"
+    ).value = "";
+
+
+    document.getElementById(
+        "mobileNumber"
+    ).value = "";
+
+
+    document.getElementById(
+        "bouquetName"
+    ).value = "";
+
+
+    document.getElementById(
+        "deliveryDate"
+    ).value = "";
+
+
+    update();
+
+
+    alert(
+        "🔄 Bouquet Reset Successfully"
+    );
+}
+
+
+// ==========================================
+// SAVE BOUQUET
+// ==========================================
+
+async function saveBouquet() {
+
+    const selectedFlower =
+        flowers.find(
+            flower => flower.qty > 0
+        );
+
+
+    if (!selectedFlower) {
+
+        alert(
+            "Please select flowers first"
+        );
+
+        return;
+    }
+
+
+    const bouquetData = {
+
+        bouquet_name:
+            document.getElementById(
+                "bouquetName"
+            ).value ||
+            "Custom Bouquet",
+
+        flower_id:
+            selectedFlower.id,
+
+        price:
+            Number(
+                document.getElementById(
+                    "totalPrice"
+                ).innerHTML
+            ),
+
+        description:
+            "Custom bouquet created by customer"
+
+    };
+
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/bouquet/",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(
+                        bouquetData
+                    )
+            }
+        );
+
+
+        const result =
+            await response.json();
+
+
+        if (response.ok) {
+
+            alert(
+                "💾 Bouquet Saved Successfully"
+            );
+
+            console.log(result);
+
+        } else {
+
+            alert(
+                result.detail ||
+                "Failed to save bouquet"
+            );
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert(
+            "FastAPI Server Not Connected"
+        );
+    }
+}
+
+
+// ==========================================
+// PLACE ORDER
+// ==========================================
+
+async function placeOrder() {
+
+    const totalPrice =
+        Number(
+            document.getElementById(
+                "totalPrice"
+            ).innerHTML
+        );
+
+
+    if (totalPrice <= 0) {
+
+        alert(
+            "Please select flowers first"
+        );
+
+        return;
+    }
+
+
+    const orderData = {
+
+        customer_id: 1,
+
+        order_date:
+            new Date().toISOString(),
+
+        total_amount:
+            totalPrice,
+
+        order_status:
+            "Pending"
+    };
+
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/order/",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify(
+                        orderData
+                    )
+            }
+        );
+
+
+        const result =
+            await response.json();
+
+
+        if (response.ok) {
+
+            alert(
+                "🛒 Order Placed Successfully"
+            );
+
+            console.log(result);
+
+        } else {
+
+            alert(
+                result.detail ||
+                "Failed to place order"
+            );
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert(
+            "FastAPI Server Not Connected"
+        );
+    }
+}

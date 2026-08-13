@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop Management - Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <h2>🌸 Flower Shop</h2>
+
+        <ul>
+
+            <li><a href="dashboard.html">🏠 Dashboard</a></li>
+            <li><a href="pages/admin.html">👤 Admin</a></li>
+            <li><a href="pages/category.html">📂 Category</a></li>
+            <li><a href="pages/flower.html">🌸 Flower</a></li>
+            <li><a href="pages/customer.html">👥 Customer</a></li>
+            <li><a href="pages/order.html">🛒 Order</a></li>
+            <li><a href="pages/order_item.html">📄 Order Item</a></li>
+            <li><a href="pages/payment.html">💳 Payment</a></li>
+            <li><a href="pages/delivery.html">🚚 Delivery</a></li>
+            <li><a href="pages/bouquet.html">💐 Bouquet</a></li>
+            <li><a href="pages/inventory.html">📦 Inventory</a></li>
+            <li><a href="bouquet_builder.html">💐 Custom Bouquet Builder</a></li>
+            <li><a href="delivery_tracking.html">🚚 Delivery Tracking</a></li>
+            <li><a href="low_stock.html">⚠️ Low Stock Alert</a></li>
+
+        </ul>
+
+    </div>
+
+    <div class="main-content">
+
+        <h1>Welcome to Flower Shop Management</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>👤 Admin</h2>
+                <p id="adminCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>📂 Category</h2>
+                <p id="categoryCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>🌸 Flower</h2>
+                <p id="flowerCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>👥 Customer</h2>
+                <p id="customerCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>🛒 Order</h2>
+                <p id="orderCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>📄 Order Item</h2>
+                <p id="orderItemCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>💳 Payment</h2>
+                <p id="paymentCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>🚚 Delivery</h2>
+                <p id="deliveryCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>💐 Bouquet</h2>
+                <p id="bouquetCount">0</p>
+            </div>
+
+            <div class="card">
+                <h2>📦 Inventory</h2>
+                <p id="inventoryCount">0</p>
+            </div>
+            <div class="card">
+                <h2>💐 Custom Bouquet Builder</h2>
+                <a href="bouquet_builder.html" class="open-btn">Open</a>
+            </div>
+
+            <div class="card">
+               <h2>🚚 Delivery Tracking</h2>
+               <a href="delivery_tracking.html" class="open-btn">Open</a>
+            </div>
+
+            <div class="card">
+               <h2>⚠️ Low Stock Alert</h2>
+               <a href="low_stock.html" class="open-btn">Open</a>
+            </div>
+
+        </div>
+        <div class="chart-container">
+
+            <div class="chart-box">
+        <h2>📊 Monthly Orders</h2>
+        <canvas id="ordersChart"></canvas>
+            </div>
+
+           <div class="chart-box">
+        <h2>📈 Sales Report</h2>
+        <canvas id="salesChart"></canvas>
+           </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

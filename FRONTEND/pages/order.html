@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Management</title>
+
+<link rel="stylesheet" href="../css/order.css">
+
+</head>
+
+
+<body>
+
+
+<h1>Order Management</h1>
+
+
+
+<form id="orderForm">
+
+
+<label>Customer ID</label>
+
+<input 
+type="number"
+id="customer_id"
+placeholder="Enter Customer ID"
+required>
+
+
+
+<label>Order Date</label>
+
+<input 
+type="date"
+id="order_date"
+required>
+
+
+
+<label>Total Amount</label>
+
+<input 
+type="number"
+id="total_amount"
+placeholder="Enter Total Amount"
+required>
+
+
+
+<label>Order Status</label>
+
+<select id="order_status" required>
+
+<option value="">
+Select Status
+</option>
+
+<option value="Pending">
+Pending
+</option>
+
+<option value="Processing">
+Processing
+</option>
+
+<option value="Completed">
+Completed
+</option>
+
+<option value="Delivered">
+Delivered
+</option>
+
+</select>
+
+
+
+<button type="submit">
+Add Order
+</button>
+
+
+</form>
+
+
+
+<hr>
+
+
+
+<table border="1">
+
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer ID</th>
+
+<th>Order Date</th>
+
+<th>Total Amount</th>
+
+<th>Order Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+
+<tbody id="orderTable">
+
+</tbody>
+
+
+</table>
+
+
+
+<script src="../js/order.js"></script>
+
+
+</body>
+
+</html>
