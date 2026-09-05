@@ -2,6 +2,14 @@ console.log("Dashboard Loaded Successfully");
 
 const API = "http://127.0.0.1:8000";
 
+let ordersChart = null;
+let salesChart = null;
+
+
+// ===============================
+// LOAD DASHBOARD DATA
+// ===============================
+
 async function loadDashboard() {
 
     try {
@@ -23,10 +31,12 @@ async function loadDashboard() {
             (await customer.json()).length;
 
         let order = await fetch(`${API}/order/`);
-        document.getElementById("orderCount").innerText =
-            (await order.json()).length;
+        const orders = await order.json();
 
-        // ✅ Correct API
+        document.getElementById("orderCount").innerText =
+            orders.length;
+
+
         let orderItem = await fetch(`${API}/order-item/`);
         document.getElementById("orderItemCount").innerText =
             (await orderItem.json()).length;
@@ -47,7 +57,12 @@ async function loadDashboard() {
         document.getElementById("inventoryCount").innerText =
             (await inventory.json()).length;
 
+
+        // Load graphs using real order data
+        loadCharts(orders);
+
     }
+
     catch (error) {
 
         console.error(error);
@@ -57,50 +72,229 @@ async function loadDashboard() {
 
 }
 
+
+// ===============================
+// PARSE ORDER DATE
+// ===============================
+
+function parseOrderDate(dateValue) {
+
+    if (!dateValue) {
+        return null;
+    }
+
+    // Supports DD-MM-YYYY
+    if (
+        typeof dateValue === "string" &&
+        /^\d{2}-\d{2}-\d{4}$/.test(dateValue)
+    ) {
+
+        const [day, month, year] = dateValue.split("-");
+
+        return new Date(
+            Number(year),
+            Number(month) - 1,
+            Number(day)
+        );
+    }
+
+
+    // Supports YYYY-MM-DD / ISO date
+    const date = new Date(dateValue);
+
+    if (!isNaN(date.getTime())) {
+        return date;
+    }
+
+    return null;
+}
+
+
+// ===============================
+// LOAD REAL-TIME CHARTS
+// ===============================
+
+function loadCharts(orders) {
+
+    const months = [
+        "Jan", "Feb", "Mar", "Apr",
+        "May", "Jun", "Jul", "Aug",
+        "Sep", "Oct", "Nov", "Dec"
+    ];
+
+
+    // Monthly order count
+    const monthlyOrders = [
+        0, 0, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 0
+    ];
+
+
+    // Monthly sales amount
+    const monthlySales = [
+        0, 0, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 0
+    ];
+
+
+    // Calculate data from actual orders
+    orders.forEach(order => {
+
+        const date = parseOrderDate(order.order_date);
+
+        if (!date) {
+            return;
+        }
+
+        const month = date.getMonth();
+
+        monthlyOrders[month]++;
+
+        monthlySales[month] +=
+            Number(order.total_amount) || 0;
+
+    });
+
+
+    // ===============================
+    // MONTHLY ORDERS CHART
+    // ===============================
+
+    if (ordersChart) {
+        ordersChart.destroy();
+    }
+
+    ordersChart = new Chart(
+        document.getElementById("ordersChart"),
+        {
+
+            type: "bar",
+
+            data: {
+
+                labels: months,
+
+                datasets: [{
+
+                    label: "Orders",
+
+                    data: monthlyOrders,
+
+                    backgroundColor: "#2e8b57"
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+                            stepSize: 1
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+
+    // ===============================
+    // SALES REPORT CHART
+    // ===============================
+
+    if (salesChart) {
+        salesChart.destroy();
+    }
+
+    salesChart = new Chart(
+        document.getElementById("salesChart"),
+        {
+
+            type: "line",
+
+            data: {
+
+                labels: months,
+
+                datasets: [{
+
+                    label: "Sales",
+
+                    data: monthlySales,
+
+                    borderColor: "#ff69b4",
+
+                    backgroundColor:
+                        "rgba(255,105,180,0.15)",
+
+                    fill: true,
+
+                    tension: 0.3
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            callback: function(value) {
+
+                                return "₹" + value;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+// ===============================
+// FIRST LOAD
+// ===============================
+
 loadDashboard();
 
-const ordersChart = new Chart(document.getElementById("ordersChart"), {
 
-    type: "bar",
+// ===============================
+// AUTO REFRESH
+// EVERY 5 SECONDS
+// ===============================
 
-    data: {
+setInterval(() => {
 
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    loadDashboard();
 
-        datasets: [{
-
-            label: "Orders",
-
-            data: [10, 20, 15, 30, 25, 40],
-
-            backgroundColor: "#2e8b57"
-
-        }]
-
-    }
-
-});
-
-const salesChart = new Chart(document.getElementById("salesChart"), {
-
-    type: "line",
-
-    data: {
-
-        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-
-        datasets: [{
-
-            label: "Sales",
-
-            data: [5000, 7000, 6000, 10000, 12000, 15000],
-
-            borderColor: "#ff69b4",
-
-            fill: false
-
-        }]
-
-    }
-
-});
+}, 5000);
