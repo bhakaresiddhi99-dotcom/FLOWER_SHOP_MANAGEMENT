@@ -3,258 +3,337 @@ const API = "http://127.0.0.1:8000/order/";
 let updateId = null;
 
 
+// ========================================
 // ADD + UPDATE ORDER
+// ========================================
 
 document
-.getElementById("orderForm")
-.addEventListener("submit", async function(e){
+    .getElementById("orderForm")
+    .addEventListener("submit", async function (e) {
 
-    e.preventDefault();
+        e.preventDefault();
 
+        const data = {
 
-    const data = {
+            customer_id:
+                Number(document.getElementById("customer_id").value),
 
-        customer_id:
-        Number(document.getElementById("customer_id").value),
+            order_date:
+                document.getElementById("order_date").value,
 
+            total_amount:
+                Number(document.getElementById("total_amount").value),
 
-        order_date:
-        document.getElementById("order_date").value,
+            order_status:
+                document.getElementById("order_status").value
 
+        };
 
-        total_amount:
-        Number(document.getElementById("total_amount").value),
+        let response;
 
+        try {
 
-        order_status:
-        document.getElementById("order_status").value
+            // ============================
+            // ADD ORDER
+            // ============================
 
-    };
+            if (updateId === null) {
 
+                response = await fetch(API, {
 
-    let response;
+                    method: "POST",
 
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
-    if(updateId === null){
+                    body: JSON.stringify(data)
 
+                });
 
-        // POST
+            }
 
-        response = await fetch(API,{
+            // ============================
+            // UPDATE ORDER
+            // ============================
 
-            method:"POST",
+            else {
 
-            headers:{
-                "Content-Type":"application/json"
-            },
+                response = await fetch(`${API}${updateId}`, {
 
-            body:JSON.stringify(data)
+                    method: "PUT",
 
-        });
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
+                    body: JSON.stringify(data)
 
-    }
+                });
 
-    else{
+            }
 
 
-        // PUT
+            // ============================
+            // SUCCESS
+            // ============================
 
-        response = await fetch(`${API}${updateId}`,{
+            if (response.ok) {
 
-            method:"PUT",
+                alert("Order Saved Successfully");
 
-            headers:{
-                "Content-Type":"application/json"
-            },
+                document
+                    .getElementById("orderForm")
+                    .reset();
 
-            body:JSON.stringify(data)
+                updateId = null;
 
-        });
+                loadOrders();
 
+            }
 
-        updateId=null;
+            // ============================
+            // ERROR
+            // ============================
 
-    }
+            else {
 
+                const errorText = await response.text();
 
+                console.error(
+                    "Order Save Error:",
+                    errorText
+                );
 
-    if(response.ok){
+                alert("Order Failed");
 
+            }
 
-        alert("Order Saved Successfully");
+        }
 
+        catch (error) {
 
-        document
-        .getElementById("orderForm")
-        .reset();
+            console.error(
+                "Order Request Error:",
+                error
+            );
 
+            alert("Error while saving order.");
 
-        loadOrders();
-
-
-    }
-
-    else{
-
-        let error = await response.json();
-
-        console.log(error);
-
-        alert("Order Failed");
-
-    }
-
-
-});
-
-
-
-
-// GET ALL ORDERS
-
-async function loadOrders(){
-
-
-    const response = await fetch(API);
-
-
-    const orders = await response.json();
-
-
-    let rows="";
-
-
-    orders.forEach(order=>{
-
-
-        rows += `
-
-        <tr>
-
-        <td>${order.order_id}</td>
-
-        <td>${order.customer_id}</td>
-
-        <td>${order.order_date}</td>
-
-        <td>${order.total_amount}</td>
-
-        <td>${order.order_status}</td>
-
-
-        <td>
-
-
-        <button onclick="editOrder(${order.order_id})">
-        Edit
-        </button>
-
-
-        <button onclick="deleteOrder(${order.order_id})">
-        Delete
-        </button>
-
-
-        </td>
-
-
-        </tr>
-
-        `;
-
+        }
 
     });
 
 
+// ========================================
+// GET ALL ORDERS
+// ========================================
 
-    document
-    .getElementById("orderTable")
-    .innerHTML = rows;
+async function loadOrders() {
 
+    try {
 
-}
+        const response = await fetch(API);
 
+        if (!response.ok) {
 
+            throw new Error(
+                "Failed to load orders"
+            );
 
+        }
 
-// EDIT ORDER
+        const orders = await response.json();
 
-
-async function editOrder(id){
-
-
-    const response =
-    await fetch(`${API}${id}`);
-
-
-    const order =
-    await response.json();
+        let rows = "";
 
 
+        orders.forEach(order => {
 
-    document.getElementById("customer_id").value =
-    order.customer_id;
+            rows += `
 
+                <tr>
 
-    document.getElementById("order_date").value =
-    order.order_date;
+                    <td>${order.id}</td>
 
+                    <td>${order.customer_id}</td>
 
-    document.getElementById("total_amount").value =
-    order.total_amount;
+                    <td>${order.order_date}</td>
 
+                    <td>${order.total_amount}</td>
 
-    document.getElementById("order_status").value =
-    order.order_status;
+                    <td>${order.order_status}</td>
 
+                    <td>
 
+                        <button
+                            onclick="editOrder(${order.id})">
+                            Edit
+                        </button>
 
-    updateId=id;
+                        <button
+                            onclick="deleteOrder(${order.id})">
+                            Delete
+                        </button>
 
+                    </td>
 
-}
+                </tr>
 
-
-
-
-// DELETE ORDER
-
-
-async function deleteOrder(id){
-
-
-    if(confirm("Delete Order?")){
-
-
-        const response =
-        await fetch(`${API}${id}`,{
-
-
-            method:"DELETE"
-
+            `;
 
         });
 
 
-
-        if(response.ok){
-
-
-            alert("Order Deleted");
-
-
-            loadOrders();
-
-
-        }
-
+        document
+            .getElementById("orderTable")
+            .innerHTML = rows;
 
     }
 
+    catch (error) {
+
+        console.error(
+            "Load Orders Error:",
+            error
+        );
+
+    }
 
 }
 
 
+// ========================================
+// EDIT ORDER
+// ========================================
+
+async function editOrder(id) {
+
+    try {
+
+        const response =
+            await fetch(`${API}${id}`);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to get order"
+            );
+
+        }
+
+
+        const order =
+            await response.json();
+
+
+        document
+            .getElementById("customer_id")
+            .value =
+            order.customer_id;
+
+
+        document
+            .getElementById("order_date")
+            .value =
+            order.order_date;
+
+
+        document
+            .getElementById("total_amount")
+            .value =
+            order.total_amount;
+
+
+        document
+            .getElementById("order_status")
+            .value =
+            order.order_status;
+
+
+        // Store order ID
+        updateId = id;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Edit Order Error:",
+            error
+        );
+
+        alert("Failed to load order.");
+
+    }
+
+}
+
+
+// ========================================
+// DELETE ORDER
+// ========================================
+
+async function deleteOrder(id) {
+
+    if (!confirm("Delete Order?")) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(`${API}${id}`, {
+
+                method: "DELETE"
+
+            });
+
+
+        if (response.ok) {
+
+            alert("Order Deleted");
+
+            loadOrders();
+
+        }
+
+        else {
+
+            const errorText =
+                await response.text();
+
+            console.error(
+                "Delete Order Error:",
+                errorText
+            );
+
+            alert("Failed to delete order.");
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Delete Order Error:",
+            error
+        );
+
+        alert("Error while deleting order.");
+
+    }
+
+}
+
+
+// ========================================
+// LOAD ORDERS WHEN PAGE OPENS
+// ========================================
 
 loadOrders();

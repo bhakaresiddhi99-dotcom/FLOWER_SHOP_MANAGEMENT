@@ -56,12 +56,12 @@ async function loadCategories() {
 
         rows += `
         <tr>
-            <td>${category.category_id}</td>
+            <td>${category.id}</td>
             <td>${category.category_name}</td>
             <td>${category.description}</td>
             <td>
-                <button onclick="editCategory(${category.category_id})">Edit</button>
-                <button onclick="deleteCategory(${category.category_id})">Delete</button>
+                <button onclick="editCategory(${category.id})">Edit</button>
+                <button onclick="deleteCategory(${category.id})">Delete</button>
             </td>
         </tr>
         `;
