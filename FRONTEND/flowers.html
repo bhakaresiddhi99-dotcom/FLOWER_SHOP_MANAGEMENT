@@ -2,213 +2,348 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Available Flowers</title>
 
     <link rel="stylesheet" href="css/flowers.css">
+
 </head>
 
 <body>
 
     <h1>🌸 Available Flowers 🌸</h1>
 
+
+    <!-- Search Section -->
+
+    <div class="search-section">
+
+        <input
+            type="text"
+            id="flowerSearch"
+            placeholder="🔍 Search flower or season...">
+
+    </div>
+
+
+    <!-- Season Search Result Heading -->
+
+    <h2 id="seasonTitle"></h2>
+
+
+    <!-- Flowers Container -->
+
     <div class="container">
 
-        <!-- Rose -->
+
+        <!-- ================= ROSE ================= -->
+
         <div class="card">
+
             <img src="images/rose.jpg" alt="Rose">
 
             <h2>🌹 Rose</h2>
 
             <p><strong>Price:</strong> ₹100</p>
+
             <p><strong>Stock:</strong> 50</p>
+
             <p><strong>Category:</strong> Rose</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Spring</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="1"
                 data-name="Rose"
-                data-price="100">
+                data-price="100"
+                data-season="Spring">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Sunflower -->
+        <!-- ================= SUNFLOWER ================= -->
+
         <div class="card">
+
             <img src="images/sunflower.jpg" alt="Sunflower">
 
             <h2>🌻 Sunflower</h2>
 
             <p><strong>Price:</strong> ₹80</p>
-            <p><strong>Stock:</strong> 30</p>
-            <p><strong>Category:</strong> Summer</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Stock:</strong> 30</p>
+
+            <p><strong>Category:</strong> Seasonal</p>
+
+            <p><strong>Season:</strong> Summer</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="2"
                 data-name="Sunflower"
-                data-price="80">
+                data-price="80"
+                data-season="Summer">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Tulip -->
+        <!-- ================= TULIP ================= -->
+
         <div class="card">
+
             <img src="images/tulip.jpg" alt="Tulip">
 
             <h2>🌷 Tulip</h2>
 
             <p><strong>Price:</strong> ₹150</p>
+
             <p><strong>Stock:</strong> 20</p>
+
             <p><strong>Category:</strong> Tulip</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Spring</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="3"
                 data-name="Tulip"
-                data-price="150">
+                data-price="150"
+                data-season="Spring">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Lily -->
+        <!-- ================= LILY ================= -->
+
         <div class="card">
+
             <img src="images/lily.jpg" alt="Lily">
 
             <h2>🌼 Lily</h2>
 
             <p><strong>Price:</strong> ₹120</p>
+
             <p><strong>Stock:</strong> 25</p>
+
             <p><strong>Category:</strong> Lily</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Winter</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="4"
                 data-name="Lily"
-                data-price="120">
+                data-price="120"
+                data-season="Winter">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Orchid -->
+        <!-- ================= ORCHID ================= -->
+
         <div class="card">
+
             <img src="images/orchid.jpg" alt="Orchid">
 
             <h2>💜 Orchid</h2>
 
             <p><strong>Price:</strong> ₹250</p>
+
             <p><strong>Stock:</strong> 15</p>
+
             <p><strong>Category:</strong> Orchid</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Monsoon</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="5"
                 data-name="Orchid"
-                data-price="250">
+                data-price="250"
+                data-season="Monsoon">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Marigold -->
+        <!-- ================= MARIGOLD ================= -->
+
         <div class="card">
+
             <img src="images/marigold.jpg" alt="Marigold">
 
             <h2>🟠 Marigold</h2>
 
             <p><strong>Price:</strong> ₹60</p>
+
             <p><strong>Stock:</strong> 80</p>
+
             <p><strong>Category:</strong> Festival</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Winter</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="6"
                 data-name="Marigold"
-                data-price="60">
+                data-price="60"
+                data-season="Winter">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Lotus -->
+        <!-- ================= LOTUS ================= -->
+
         <div class="card">
+
             <img src="images/lotus.jpg" alt="Lotus">
 
             <h2>🪷 Lotus</h2>
 
             <p><strong>Price:</strong> ₹180</p>
+
             <p><strong>Stock:</strong> 18</p>
+
             <p><strong>Category:</strong> Lotus</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Monsoon</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="7"
                 data-name="Lotus"
-                data-price="180">
+                data-price="180"
+                data-season="Monsoon">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Daisy -->
+        <!-- ================= DAISY ================= -->
+
         <div class="card">
+
             <img src="images/daisy.jpg" alt="Daisy">
 
             <h2>🌼 Daisy</h2>
 
             <p><strong>Price:</strong> ₹90</p>
+
             <p><strong>Stock:</strong> 35</p>
+
             <p><strong>Category:</strong> Daisy</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Spring</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="8"
                 data-name="Daisy"
-                data-price="90">
+                data-price="90"
+                data-season="Spring">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Jasmine -->
+        <!-- ================= JASMINE ================= -->
+
         <div class="card">
+
             <img src="images/jasmine.jpg" alt="Jasmine">
 
             <h2>🤍 Jasmine</h2>
 
             <p><strong>Price:</strong> ₹70</p>
+
             <p><strong>Stock:</strong> 60</p>
+
             <p><strong>Category:</strong> Jasmine</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Summer</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="9"
                 data-name="Jasmine"
-                data-price="70">
+                data-price="70"
+                data-season="Summer">
+
                 Add to Bouquet
+
             </button>
+
         </div>
 
 
-        <!-- Carnation -->
+        <!-- ================= CARNATION ================= -->
+
         <div class="card">
+
             <img src="images/carnation.jpg" alt="Carnation">
 
             <h2>🌺 Carnation</h2>
 
             <p><strong>Price:</strong> ₹140</p>
+
             <p><strong>Stock:</strong> 22</p>
+
             <p><strong>Category:</strong> Carnation</p>
 
-            <button class="add-to-bouquet"
+            <p><strong>Season:</strong> Winter</p>
+
+            <button
+                class="add-to-bouquet"
                 data-id="10"
                 data-name="Carnation"
-                data-price="140">
+                data-price="140"
+                data-season="Winter">
+
                 Add to Bouquet
+
             </button>
+
         </div>
+
 
     </div>
 
 
     <!-- JavaScript -->
+
     <script src="js/flowers.js"></script>
 
 </body>
