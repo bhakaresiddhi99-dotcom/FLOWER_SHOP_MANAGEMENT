@@ -12,6 +12,7 @@ from routers.delivery import router as delivery_router
 from routers.bouquet import router as bouquet_router
 from routers.inventory import router as inventory_router
 from routers.login import router as login_router
+from routers.customer_auth import router as customer_auth_router
 
 
 app = FastAPI(
@@ -45,6 +46,7 @@ app.include_router(delivery_router)
 app.include_router(bouquet_router)
 app.include_router(inventory_router)
 app.include_router(login_router)
+app.include_router(customer_auth_router)
 
 
 
